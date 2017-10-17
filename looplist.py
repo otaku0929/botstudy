@@ -2,6 +2,39 @@ import requests
 import random
 from bs4 import BeautifulSoup
 
+def movie_new():
+
+    alist = []
+    for page in range(1,2):#collect movies from 5 page
+        page_url = 'https://tw.movies.yahoo.com/movie_thisweek.html?page={}'.format(page)
+        res = requests.get(page_url)
+        movie_list = ymovie_content(res)
+        for movie in movie_list:
+            alist.append(movie)        
+    
+    #select 3 mobvies from 5 page
+    random.shuffle(alist)
+    randommovie = alist[0:5]
+
+    #export movie information 
+    content = ""
+    for data in randommovie:
+        title = format(data.get("data-ga")[23:].strip("]"))
+        url = format(data.get("href"))
+        #img = data.select('img')[0]['src']
+        content += '本週上映{}\n{}\n\n'.format(title,url)
+
+    return content
+    
+def ymovie_content(res):
+    #rescontent = res.content
+    soup = BeautifulSoup(res.content,'html.parser')
+    
+    content = ""
+    alist = soup.select("div.release_foto a[class='gabtn']")
+    
+    return alist
+
 def yt():
 
     url = "https://www.youtube.com/channel/UC-9-kyTW8ZkZNDHQJ6FgpwQ/featured"
@@ -71,5 +104,13 @@ def pt():
     #content=range()
     print(content)
 
+def wt():
+    content=ymovie()
+    f=open('output.txt','w', encoding='UTF-8')
+    f.write(format(content))
+    f.close()
+    print ('--print ok--')
+
 if __name__ == '__main__':
     print(pt())
+    #print(wt())
