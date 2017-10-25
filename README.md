@@ -17,3 +17,7 @@ def pick17sing():
         else:
             pass
     return "Try again!"
+    
+    
+    2 http://www.cwb.gov.tw/V7/prevent/typhoon/Data/PTA_NEW/index.htm?dumm=Wed
+    
