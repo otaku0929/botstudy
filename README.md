@@ -21,3 +21,25 @@ def pick17sing():
     
     2 http://www.cwb.gov.tw/V7/prevent/typhoon/Data/PTA_NEW/index.htm?dumm=Wed
     
+    
+def game777():
+
+    f = open('game777.txt','r')
+    n = int(f.read())
+
+    x = "%04d"% random.randint(0,9999)
+
+    if x == 7777:
+        print ("you win")
+        n = 0
+        w=open('game777.txt','w')
+        w.write(format(n))
+        w.close()
+    else:
+        n += 1
+        text = 'your number is {} not 7777 now:{}'.format(x,n)
+        print (text)
+        w=open('game777.txt','w')
+        w.write(format(n))
+        w.close()
+          
